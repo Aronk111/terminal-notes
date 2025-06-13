@@ -103,6 +103,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				if err != nil {
 					return m, tea.Quit
 				}
+
+				if len(m.notes) != 0 {
+					m.listIndex = len(m.notes) - 1
+				}
 			}
 		case titleView:
 			switch key {
