@@ -1,5 +1,11 @@
 ## If you wish to build the project yourself
 
+Make sure you have [go](https://go.dev/dl/) installed!<br>
+Navigate to where you want to have the project downloaded to and do:
+
+`git clone https://github.com/Aronk111/terminal-notes`<br>
+then `cd` into the downloaded folder
+
 ### Windows:
 ```
 mkdir bin
