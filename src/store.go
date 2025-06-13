@@ -77,3 +77,14 @@ func (s *Store) SaveNote(note Note) error {
 
 	return nil
 }
+
+func (s *Store) DeleteNote(note Note) error {
+	deleteQuery := `DELETE FROM notes WHERE id = ?;`
+
+	if _, err := s.conn.Exec(deleteQuery, note.ID); err != nil {
+		log.Printf("Could not delete note with id: %v\n%v", note.ID, err)
+		return err
+	}
+
+	return nil
+}

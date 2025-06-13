@@ -72,10 +72,14 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			case "up", "k":
 				if m.listIndex > 0 {
 					m.listIndex--
+				} else if m.listIndex == 0 {
+					m.listIndex = len(m.notes) - 1
 				}
 			case "down", "j":
 				if m.listIndex < len(m.notes)-1 {
 					m.listIndex++
+				} else if m.listIndex == len(m.notes)-1 {
+					m.listIndex = 0
 				}
 			case "enter":
 				if len(m.notes) == 0 {
@@ -89,6 +93,16 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.textarea.CursorEnd()
 
 				m.state = bodyView
+			case "d":
+				m.currentNote = m.notes[m.listIndex]
+
+				m.store.DeleteNote(m.currentNote)
+
+				var err error
+				m.notes, err = m.store.GetNotes()
+				if err != nil {
+					return m, tea.Quit
+				}
 			}
 		case titleView:
 			switch key {
@@ -121,7 +135,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 					var err error
 					if err = m.store.SaveNote(m.currentNote); err != nil {
-						// TODO: Handle error
 						return m, tea.Quit
 					}
 
