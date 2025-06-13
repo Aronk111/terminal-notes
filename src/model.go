@@ -78,6 +78,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.listIndex++
 				}
 			case "enter":
+				if len(m.notes) == 0 {
+					break
+				}
+
 				m.currentNote = m.notes[m.listIndex]
 
 				m.textarea.SetValue(m.currentNote.Body)
@@ -90,7 +94,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			switch key {
 			case "esc":
 				m.state = listView
-			case "ctrl+s":
+			case "enter":
 				title := m.textinput.Value()
 				if title != "" {
 					m.currentNote.Title = title

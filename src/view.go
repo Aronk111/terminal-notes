@@ -26,7 +26,7 @@ func (m model) View() string {
 		s += "Note title:\n\n"
 
 		s += m.textinput.View() + "\n\n"
-		s += faintStlye.Render("ctrl+s - save, esc - discard")
+		s += faintStlye.Render("enter - save, esc - discard")
 	}
 
 	if m.state == listView {
@@ -44,7 +44,7 @@ func (m model) View() string {
 			s += enumeratorStyle.Render(prefix) + n.Title + " | " + faintStlye.Render(shortBody) + "\n\n"
 		}
 
-		s += faintStlye.Render("enter - select, n - new, q - quit")
+		s += faintStlye.Render("enter - select, n - new, up/k - move up, down/j - move down ,q - quit")
 	}
 
 	return s

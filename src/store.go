@@ -21,7 +21,7 @@ type Store struct {
 func (s *Store) Init() error {
 	var err error
 
-	s.conn, err = sql.Open("sqlite3", "../dist/notes.db")
+	s.conn, err = sql.Open("sqlite3", "./notes.db")
 	if err != nil {
 		log.Printf("Could not open database: %v", err)
 		return err
