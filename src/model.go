@@ -94,6 +94,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 				m.state = bodyView
 			case "d":
+				if len(m.notes) == 0 {
+					break
+				}
+
 				m.currentNote = m.notes[m.listIndex]
 
 				m.store.DeleteNote(m.currentNote)
